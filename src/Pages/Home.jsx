@@ -7,11 +7,11 @@ function Home() {
   return (
     <div className="w-full h-full">
       <Navbar />
-      <div className="w-full h-[39vh]">
+      <div className="w-[full] h-[45vh] mb-4">
         <LocationPicker />
       </div>
       {/* suggestion sectionn */}
-      <div className="w-full h-auto p-[20px]">
+      <div className="w-full p-[20px]">
         <h1 className="ml-[5px] text-3xl font-semibold mb-5">Suggestion</h1>
         <div className="flex flex-col gap-[1.7rem]">
           <div className="bg-gray-100 w-[100%] h-[20vh] flex items-center rounded-xl">

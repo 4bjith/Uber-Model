@@ -5,7 +5,7 @@ import Button2 from './Button2'
 
 function Navbar() {
   return (
-    <div className="w-[100%] h-[9vh] bg-black text-white flex justify-between px-[10px]">
+    <div className="w-[100%] h-[9vh] min-h-[67px] bg-black text-white flex justify-between px-[10px]">
         <div className="w-[40%] flex items-center">
             <h1 className="text-[1.4rem] font-semibold px-[20px] cursor-pointer">Uber</h1>
         </div>

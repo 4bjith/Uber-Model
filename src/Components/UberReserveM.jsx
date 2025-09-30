@@ -22,13 +22,13 @@ const UberReserveM = () => {
   };
 
   return (
-    <div className="bg-[#a3d5df] rounded-2xl p-8 w-full max-w-md font-sans shadow-md">
-      <h2 className="text-2xl font-bold mb-4 leading-tight">
-        Get your ride right with <br /> Uber Reserve
+    <div className="bg-[#a3d5df] rounded-2xl p-8 w-full flex flex-col items-start font-sans shadow-md ">
+      <h2 className="text-2xl font-bold mb-4 leading-tight md:w-[50%]">
+        Get your ride right with Uber Reserve
       </h2>
       <p className="text-base mb-4">Choose date and time</p>
 
-      <div className="flex justify-between gap-4 mb-6">
+      <div className="flex justify-between gap-4 mb-6 md:w-[50%]">
         {/* Date Select */}
         <div className="flex flex-col w-1/2">
           <label className="text-gray-700 text-sm mb-1">Date</label>
@@ -63,21 +63,6 @@ const UberReserveM = () => {
               className="w-full bg-gray-100 text-black py-2 pl-10 pr-4 rounded-xl appearance-none focus:outline-none"
               popperPlacement="bottom-start"
             />
-
-            {/* <select
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="w-full bg-gray-100 text-black py-2 pl-10 pr-4 rounded-xl appearance-none focus:outline-none"
-            >
-              <option value="" disabled>
-                Time
-              </option>
-              {times.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select> */}
           </div>
         </div>
       </div>
@@ -85,10 +70,11 @@ const UberReserveM = () => {
       {/* Submit Button */}
       <button
         onClick={handleSubmit}
-        className="w-full bg-black text-white py-3 rounded-xl text-lg font-medium hover:opacity-90 transition"
+        className="w-full bg-black text-white py-3 rounded-xl text-lg font-medium hover:opacity-90 transition  md:w-[50%]"
       >
         Next
       </button>
+      
     </div>
   );
 };

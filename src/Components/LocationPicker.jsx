@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaDotCircle } from 'react-icons/fa';
 import { FiNavigation } from 'react-icons/fi';
 import { TbSquareDotFilled } from "react-icons/tb";
+import Button3 from "./Button3";
+import Button4 from "./Button4";
 
 function LocationPicker() {
   const [pickup, setPickup] = useState("");
@@ -55,12 +57,8 @@ function LocationPicker() {
       </div>
 
       <div className="flex items-center gap-4 mt-6">
-        <button className="bg-black text-white px-4 py-2 rounded-lg">
-          Request Ride
-        </button>
-        <button className="ml-7 border-b-1 pb-1">
-          Log in to see your recent activity
-        </button>
+        <Button3><h2 className="text-[1.1rem]">See prices</h2></Button3>
+        <Button4><h2 className="text-[1.1rem]">Log in to see your recent activity</h2></Button4>
       </div>
     </div>
   );

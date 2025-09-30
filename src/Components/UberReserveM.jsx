@@ -3,7 +3,7 @@ import { FaCalendarAlt, FaClock } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const UberReserve = () => {
+const UberReserveM = () => {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState("");
 
@@ -93,4 +93,4 @@ const UberReserve = () => {
   );
 };
 
-export default UberReserve;
+export default UberReserveM;

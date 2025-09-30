@@ -4,7 +4,9 @@ import LocationPicker from "../Components/LocationPicker";
 import Button1 from "../Components/Button1";
 import Button3 from "../Components/Button3";
 import Button4 from "../Components/Button4";
-import UberReserve from "../Components/Uberreserve";
+import UberReserveM from "../Components/UberReserveM";
+
+
 
 function Home() {
   return (
@@ -109,7 +111,7 @@ function Home() {
         <h1 className="ml-[5px] text-3xl font-semibold mb-5">
           Plan for Later
         </h1>
-        <UberReserve/>
+        <UberReserveM/>
       </div>
       {/* No.2 */}
       <div className="w-[100%] h-[90vh] px-[20px] mt-[35px] ">
@@ -180,7 +182,7 @@ function Home() {
           </Button3>
         </div>
       </div>
-      
+
       {/* Bottom */}
       <div className="w-[100%] h-[9vh] "></div>
       <div className="w-[100%] h-[9vh] px-[20px] py-[40px] fixed bottom-0 mt-4 bg-white flex justify-center items-center">

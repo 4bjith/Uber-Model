@@ -9,8 +9,10 @@ import UberReserveM from "../Components/UberReserveM";
 function Home() {
   return (
     <div className="w-full h-full">
-      <Navbar />
-      <div className="w-[100%] px-[20px] md:px-[10vw]">
+      <div className=" w-full fixed top-0 z-50">
+        <Navbar />
+      </div>
+      <div className="w-[100%] px-[20px] mt-[12vh] md:px-[10vw]">
         <div className="w-[full] h-auto mb-4 flex flex-col md:flex-row">
           <div className="w-[100%] h-auto md:w-[45%]">
             <LocationPicker />
@@ -27,8 +29,8 @@ function Home() {
         {/* suggestion sectionn */}
         <div className="w-full p-[20px]">
           <h1 className="ml-[5px] text-3xl font-semibold mb-5">Suggestion</h1>
-          <div className="flex flex-col gap-[1.7rem] md:flex-row flex-wrap  ">
-            <div className="bg-gray-100 w-[100%] h-[20vh] flex items-center rounded-xl md:w-[30%]">
+          <div className="flex flex-col md:flex-row flex-wrap gap-[1rem] ">
+            <div className="bg-gray-100 w-[100%] h-auto flex items-center rounded-xl md:w-[30%]">
               <div className="w-[65%] h-[90%] p-[20px] flex flex-col justify-center items-start gap-2.5">
                 <h2 className="text-[1rem] font-semibold">Ride</h2>
                 <p className="text-[0.8rem] mb-1">
@@ -48,7 +50,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="bg-gray-100 w-[100%] h-[20vh] flex items-center rounded-xl md:w-[30%]">
+            <div className="bg-gray-100 w-[100%] h-auto flex items-center rounded-xl md:w-[30%]">
               <div className="w-[65%] h-[90%] p-[20px] flex flex-col justify-center items-start gap-2.5">
                 <h2 className="text-[1rem] font-semibold">Reserve</h2>
                 <p className="text-[0.8rem] mb-1">
@@ -69,7 +71,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="bg-gray-100 w-[100%] h-[20vh] flex items-center rounded-xl md:w-[30%]">
+            <div className="bg-gray-100 w-[100%] h-auto flex items-center rounded-xl md:w-[30%]">
               <div className="w-[65%] h-[90%] p-[20px] flex flex-col justify-center items-start gap-2.5">
                 <h2 className="text-[1rem] font-semibold">Intercity</h2>
                 <p className="text-[0.8rem] mb-1">

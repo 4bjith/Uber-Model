@@ -11,9 +11,9 @@ function AccountManager() {
   return (
     <div className="w-full h-[100vh]">
       {/* Navbar */}
-      <div className="">
+      {/* <div className="">
         <Navbar2 />
-      </div>
+      </div> */}
       {/* Body */}
       <div className="w-full h-full">
         {/* (Deskto view left) account menu */}

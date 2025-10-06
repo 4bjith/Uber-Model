@@ -1,8 +1,19 @@
 import { useState } from "react";
-import { ChevronDown, User, HelpCircle, Wallet, BookOpen, Settings, Car, Truck } from "lucide-react"; // install lucide-react
+import {
+  ChevronDown,
+  User,
+  HelpCircle,
+  Wallet,
+  BookOpen,
+  Settings,
+  Car,
+  Truck,
+} from "lucide-react"; // install lucide-react
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="relative inline-block text-left">
@@ -46,7 +57,10 @@ export default function ProfileDropdown() {
 
           {/* List Items */}
           <div className="flex flex-col space-y-3">
-            <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 rounded-lg">
+            <button
+              onClick={() => navigate("/account")}
+              className="flex items-center space-x-3 hover:bg-gray-100 p-2 rounded-lg"
+            >
               <User className="w-5 h-5" />
               <span>Manage account</span>
             </button>
@@ -58,7 +72,10 @@ export default function ProfileDropdown() {
               <Truck className="w-5 h-5" />
               <span>Drive & deliver</span>
             </button>
-            <button className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg "> Sign out</button>
+            <button className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg ">
+              {" "}
+              Sign out
+            </button>
           </div>
         </div>
       )}

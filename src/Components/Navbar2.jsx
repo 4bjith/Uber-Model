@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import ProfileDropdown from "./ProfileDropdown";
+import { useNavigate } from "react-router-dom";
 
 function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="w-full h-[9vh] min-h-[67px] bg-white text-black flex justify-between px-4 shadow">
@@ -24,7 +26,7 @@ function Navbar2() {
             <IoClose onClick={() => setIsOpen(false)} className="cursor-pointer" />
           </div>
 
-          <h2 className="text-[1.3rem] font-semibold cursor-pointer text-gray-700 md:text-[1rem]">
+          <h2 onClick={()=>navigate('/bookride')} className="text-[1.3rem] font-semibold cursor-pointer text-gray-700 md:text-[1rem]">
             Ride
           </h2>
           <h2 className="text-[1.3rem] font-semibold cursor-pointer text-gray-600 md:text-[1rem]">

@@ -9,15 +9,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button3 from "./Button3";
 import Button4 from "./Button4";
 
+
 function LocationPicker2() {
   const [pickup, setPickup] = useState("");
   const [dropoff, setDropoff] = useState("");
   const [date, setDate] = useState(null);
   const [time, setTime] = useState("");
+  
 
   const handleSubmit = () => {
     const formattedDate = date ? date.toDateString() : "No date selected";
     alert(`Reserved for ${date} at ${time}`);
+    
   };
   return (
     <div className="w-full h-auto px-[20px] pb-2 md:px-[50px] md:border-2 md:border-gray-300 rounded-2xl md:pb-[25px]">

@@ -1,18 +1,18 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import LoginForm from "./LoginForm";
 import api from "../api/axiosClient";
 import { useNavigate } from "react-router-dom";
 import UserStore from "../Zustand/UserStore";
 
 function Login({ setIsOpen }) {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const navigate = useNavigate();
   const { addToken } = UserStore();
 
   const loginSubmit = async () => {
-    const email = emailRef.current?.value;
-    const password = passwordRef.current?.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
 
     if (!email || !password) {
       alert("Please enter both email and password.");

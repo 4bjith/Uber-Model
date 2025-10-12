@@ -42,7 +42,7 @@ function LocationPicker2() {
             type="text"
             placeholder="Pickup location"
             value={pickup}
-            // onChange={(e) => setPickup(e.target.value)}
+            onChange={(e) => setPickup(e.target.value)}
             className="bg-transparent outline-none text-gray-700 text-[0.9rem] w-full"
           />
         </div>
@@ -64,7 +64,7 @@ function LocationPicker2() {
             type="text"
             placeholder="Dropoff location"
             value={dropoff}
-            // onChange={(e) => setDropoff(e.target.value)}
+            onChange={(e) => setDropoff(e.target.value)}
             className="bg-transparent outline-none text-gray-700 text-[0.9rem] w-full"
           />
         </div>

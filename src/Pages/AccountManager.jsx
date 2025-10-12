@@ -45,7 +45,9 @@ function AccountManager() {
             onClick={(e) => setIsActive("home")}
             className="w-[25%] py-[20px] hover:border-b-4 "
           >
-            Home
+            Home{
+              user.profileImg
+            }
           </button>
           <button
             onClick={(e) => setIsActive("personalInfo")}

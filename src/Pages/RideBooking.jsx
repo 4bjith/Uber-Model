@@ -1,14 +1,20 @@
 import React from "react";
 import LocationPicker2 from "../Components/LocationPicker2";
 import Navbar from "../Components/Navbar";
+import UserStore from "../Zustand/UserStore";
+import Navbar2 from "../Components/Navbar2";
 
 function RideBooking() {
+  const user = UserStore((state)=> state.user)
   return (
     // main body
     <div className="w-full min-h-[100vh]">
       {/* Navbar */}
       <div className="w-full h-auto">
-        <Navbar/>
+        {
+          !user?<Navbar/>:<Navbar2/>
+        }
+        
       </div>
       <div className="w-full  md:flex flex-row-reverse ">
         {/* map section */}

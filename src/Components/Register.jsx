@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useRef } from "react";
+import api from "../api/axiosClient";
 
 function Register({ setIsOpen }) {
+  const nameRef = useRef("");
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  const numberRef = useRef("");
+
+  const userRegister = async () => {
+    try {
+      // taking values from inputs using useref
+      const name = nameRef.current.value;
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      const mobile = numberRef.current.value;
+      // ✅ Basic input validation
+      if (!name || !email || !password || !mobile) {
+        alert("Please fill all fields");
+        return;
+      }
+      const res = await api.post("/register", {
+        name,
+        email,
+        password,
+        mobile,
+      });
+      const newUser = res.data;
+      if (newUser) {
+        alert("Account created successfully! Please login to continue.");
+        setIsOpen("login");
+      }
+    } catch (error) {
+      console.error("Cant register ", error);
+      alert("Something went wrong while registering. Please try again.");
+    }
+  };
   return (
     <div className="w-full h-full flex justify-center md:items-center ">
       <div className="w-[90%] h-[100%] rounded-sm bg-gray-100 flex flex-col-reverse md:flex md:flex-row-reverse md:h-[60%] md:w-[70%] ">
@@ -35,6 +69,7 @@ function Register({ setIsOpen }) {
                 type="text"
                 name="name"
                 id="name"
+                ref={nameRef}
                 className="border-[1px] h-[3rem] rounded-xl px-[20px] tracking-wide text-gray-500 text-[1rem] placeholder:text-[0.9rem]"
                 placeholder="enter full name here ..."
               />
@@ -49,8 +84,9 @@ function Register({ setIsOpen }) {
 
               <input
                 type="number"
-                name="number"
+                name="tel"
                 id="number"
+                ref={numberRef}
                 className="border-[1px] h-[3rem] rounded-xl px-[20px] tracking-wide text-gray-500 text-[1rem] placeholder:text-[0.9rem]"
                 placeholder="enter mobilenumber here ..."
               />
@@ -67,6 +103,7 @@ function Register({ setIsOpen }) {
                 type="email"
                 name="email"
                 id="email"
+                ref={emailRef}
                 className="border-[1px] h-[3rem] rounded-xl px-[20px] tracking-wide text-gray-500 text-[1rem] placeholder:text-[0.9rem]"
                 placeholder="enter email here ..."
               />
@@ -83,12 +120,16 @@ function Register({ setIsOpen }) {
                 type="password"
                 name="password"
                 id="password"
+                ref={passwordRef}
                 placeholder="Enter password here ..."
                 className="border-[1px] h-[3rem] rounded-xl px-[20px] tracking-wide text-gray-500 text-[1rem] placeholder:text-[0.9rem]"
               />
             </div>
             <div className="w-full h-auto flex justify-center">
-              <button className="px-[40px] py-[10px] border-0 font-mono bg-gray-700 text-white rounded-xl shadow-xl shadow-black cursor-pointer hover:scale-105 ">
+              <button
+                onClick={userRegister}
+                className="px-[40px] py-[10px] border-0 font-mono bg-gray-700 text-white rounded-xl shadow-xl shadow-black cursor-pointer hover:scale-105 "
+              >
                 Register
               </button>
             </div>

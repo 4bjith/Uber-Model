@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import ProfileDropdown from "./ProfileDropdown";
 import { useNavigate } from "react-router-dom";
+import UserStore from "../Zustand/UserStore";
 
 function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const token = UserStore((state) => state.token);
 
   return (
     <div className="w-full h-[9vh] min-h-[67px] bg-white text-black flex justify-between px-4 shadow">
@@ -23,10 +25,16 @@ function Navbar2() {
         >
           {/* Close button (only mobile) */}
           <div className="w-full flex justify-end text-3xl md:hidden">
-            <IoClose onClick={() => setIsOpen(false)} className="cursor-pointer" />
+            <IoClose
+              onClick={() => setIsOpen(false)}
+              className="cursor-pointer"
+            />
           </div>
 
-          <h2 onClick={()=>navigate('/bookride')} className="text-[1.3rem] font-semibold cursor-pointer text-gray-700 md:text-[1rem]">
+          <h2
+            onClick={() => navigate("/bookride")}
+            className="text-[1.3rem] font-semibold cursor-pointer text-gray-700 md:text-[1rem]"
+          >
             Ride
           </h2>
           <h2 className="text-[1.3rem] font-semibold cursor-pointer text-gray-600 md:text-[1rem]">
@@ -45,7 +53,7 @@ function Navbar2() {
       <div className="w-[30%] flex justify-end items-center">
         {/* Profile Dropdown */}
         <div className="flex items-center gap-3">
-          <ProfileDropdown />
+          {token ? <ProfileDropdown /> : <></>}
         </div>
 
         {/* Hamburger button (only mobile) */}

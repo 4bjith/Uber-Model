@@ -16,6 +16,7 @@ export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const user = UserStore((state) => state.user);
+  const logout = UserStore((state) => state.logout);
 
   return (
     <div className="relative inline-block text-left">
@@ -24,7 +25,10 @@ export default function ProfileDropdown() {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 bg-black text-white px-4 py-2 mr-2 rounded-full"
       >
-        <span>{user.name}</span>
+        {
+          user? <span>{user.name}</span>:<span>.....</span>
+        }
+       
         <ChevronDown className="w-4 h-4" />
       </button>
 
@@ -34,7 +38,10 @@ export default function ProfileDropdown() {
           {/* User Info */}
           <div className="flex justify-between items-center border-b pb-3 mb-3">
             <div>
-              <h3 className="font-bold text-lg">{user.name}</h3>
+              {
+                user?<h3 className="font-bold text-lg">{user.name}</h3>:<h3 className="font-bold text-lg">......</h3>
+              }
+              
             </div>
             <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
               <User className="w-6 h-6 text-gray-500" />
@@ -74,8 +81,14 @@ export default function ProfileDropdown() {
               <Truck className="w-5 h-5" />
               <span>Drive & deliver</span>
             </button>
-            <button className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg ">
-              {" "}
+            <button
+              onClick={() => {
+                logout();
+                console.log(JSON.parse(localStorage.getItem("auth-storage")));
+                navigate("/");
+              }}
+              className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg "
+            >
               Sign out
             </button>
           </div>

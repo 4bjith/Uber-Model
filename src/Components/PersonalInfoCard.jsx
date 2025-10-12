@@ -1,19 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const PersonalInfoCard = () => {
-    const Navigate = useNavigate()
+const PersonalInfoCard = ({ name, email, profile, mobile }) => {
+  const Navigate = useNavigate();
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md font-sans">
       <h2 className="text-2xl font-bold mb-6">Personal info</h2>
 
       {/* Profile Picture */}
       <div className="relative w-20 h-20 mb-6">
-        <img
-          src="https://via.placeholder.com/80"
-          alt="Profile"
-          className="rounded-full w-20 h-20 object-cover"
-        />
+        {!profile ? (
+          <img
+            src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+            alt="Profile"
+            className="rounded-full w-20 h-20 object-cover"
+          />
+        ) : (
+          <img src={profile} className="rounded-full w-20 h-20 object-cover" />
+        )}
+
         <button className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +27,12 @@ const PersonalInfoCard = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536M9 13l6 6m2-2a9 9 0 11-4.243-7.757L17 15l-2 2z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15.232 5.232l3.536 3.536M9 13l6 6m2-2a9 9 0 11-4.243-7.757L17 15l-2 2z"
+            />
           </svg>
         </button>
       </div>
@@ -30,8 +40,11 @@ const PersonalInfoCard = () => {
       {/* Name */}
       <div className="mb-4">
         <p className="text-sm text-gray-500">Name</p>
-        <div onClick={()=>Navigate("/account/updatename")} className="flex items-center justify-between  cursor-pointer">
-          <p className="text-lg">Abhijith ATZz</p>
+        <div
+          onClick={() => Navigate("/account/updatename")}
+          className="flex items-center justify-between  cursor-pointer"
+        >
+          <p className="text-lg">{name}</p>
           <span className="text-gray-400">&gt;</span>
         </div>
       </div>
@@ -41,10 +54,7 @@ const PersonalInfoCard = () => {
         <p className="text-sm text-gray-500">Phone number</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <p className="text-lg">+91 77365 05145</p>
-            <span title="Unverified">
-              ⚠️
-            </span>
+            <p className="text-lg">+91 {mobile}</p>
           </div>
           <span className="text-gray-400">&gt;</span>
         </div>
@@ -55,7 +65,7 @@ const PersonalInfoCard = () => {
         <p className="text-sm text-gray-500">Email</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <p className="text-lg">abhijithatzz@gmail.com</p>
+            <p className="text-lg">{email}</p>
             <span title="Verified">✅</span>
           </div>
           <span className="text-gray-400">&gt;</span>

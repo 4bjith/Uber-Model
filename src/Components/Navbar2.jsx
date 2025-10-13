@@ -9,10 +9,12 @@ function Navbar2() {
   const navigate = useNavigate();
   const token = UserStore((state) => state.token);
 
+  
+
   return (
     <div className="w-full h-[9vh] min-h-[67px] bg-white text-black flex justify-between px-4 shadow">
       {/* Left Section - Logo + Nav Links */}
-      <div className="w-[70%] flex items-center">
+      <div className="w-[60%] flex items-center">
         <h1 className="text-[1.4rem] font-semibold px-2 cursor-pointer tracking-wide">
           Uber
         </h1>
@@ -50,7 +52,7 @@ function Navbar2() {
       </div>
 
       {/* Right Section - Profile + Hamburger */}
-      <div className="w-[30%] flex justify-end items-center">
+      <div className="w-[40%] flex justify-end items-center">
         {/* Profile Dropdown */}
         <div className="flex items-center gap-3">
           {token ? <ProfileDropdown /> : <></>}

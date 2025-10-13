@@ -4,33 +4,21 @@ import PersonalInfoCard from "../Components/PersonalInfoCard";
 import api from "../api/axiosClient";
 import { useEffect } from "react";
 import UserStore from "../Zustand/UserStore";
+import { useQuery } from "@tanstack/react-query";
 
 function AccountManager() {
   const [isActive, setIsActive] = useState("home");
   const token = UserStore((state) => state.token);
-  const user = UserStore((state) => state.user);
-  const userData = UserStore((state) => state.user);
-  const setUser = UserStore((state) => state.setUser);
-  const getUser = async () => {
-    try {
-      const response = await api.get("/users", {
+
+  // function to call get api function using react query;
+
+    const {data,isLoading} = useQuery({ queryKey: ['user'], queryFn: async()=>{
+      return await api.get("/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setUser(response.data);
-      console.log("user data is now in zustand :", response.data);
-    } catch (error) {
-      console.error("error while running getuser function", error);
-    }
-  };
+    } })
 
-  useEffect(() => {
-    if (token && !userData) {
-      getUser();
-    }
-  }, [token, userData]);
-  if (!userData) {
-    return <div className="p-8 text-center">Loading User Profile...</div>;
-  }
+  if(isLoading) return <h1>loadinggg...................</h1>
   return (
     <div className="w-full h-[100vh]">
       {/* Navbar */}
@@ -45,9 +33,7 @@ function AccountManager() {
             onClick={(e) => setIsActive("home")}
             className="w-[25%] py-[20px] hover:border-b-4 "
           >
-            Home{
-              user.profileImg
-            }
+            Home
           </button>
           <button
             onClick={(e) => setIsActive("personalInfo")}
@@ -72,19 +58,19 @@ function AccountManager() {
         <div className="w-full">
           {isActive === "home" ? (
             <AccountHome
-              name={user.name}
-              email={user.email}
-              profile={user.profileImg}
+              name={data.data.name}
+              email={data.data.email}
+              profile={data.data.profileImg}
             />
           ) : (
             <></>
           )}
           {isActive === "personalInfo" ? (
             <PersonalInfoCard
-              name={user.name}
-              email={user.email}
-              profile={user.profileImg}
-              mobile={user.mobile}
+              name={data.data.name}
+              email={data.data.email}
+              profile={data.data.profileImg}
+              mobile={data.data.mobile}
             />
           ) : (
             <></>

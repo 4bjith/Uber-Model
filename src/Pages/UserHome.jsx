@@ -8,6 +8,8 @@ import BookingSteps from "../Components/BookingSteps";
 import Suggestion from "../Components/Suggestion";
 
 export default function UserHome() {
+
+  
   return (
     <div className="w-full h-full">
       <Navbar2 />

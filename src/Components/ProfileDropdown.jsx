@@ -9,14 +9,29 @@ import {
   Settings,
   Car,
   Truck,
-} from "lucide-react"; // install lucide-react
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import api from "../api/axiosClient"; // ✅ Import added
 
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const user = UserStore((state) => state.user);
+  const token = UserStore((state) => state.token);
   const logout = UserStore((state) => state.logout);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      return await api.get("/users", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    },
+    enabled: !!token, // ✅ Only run if token exists
+  });
+
+  const userName = data?.data?.name;
+  const userImage = data?.data?.profileImg;
 
   return (
     <div className="relative inline-block text-left">
@@ -25,10 +40,7 @@ export default function ProfileDropdown() {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 bg-black text-white px-4 py-2 mr-2 rounded-full"
       >
-        {
-          user? <span>{user.name}</span>:<span>.....</span>
-        }
-       
+        {token && userName ? <span>{userName}</span> : <span>.....</span>}
         <ChevronDown className="w-4 h-4" />
       </button>
 
@@ -38,13 +50,16 @@ export default function ProfileDropdown() {
           {/* User Info */}
           <div className="flex justify-between items-center border-b pb-3 mb-3">
             <div>
-              {
-                user?<h3 className="font-bold text-lg">{user.name}</h3>:<h3 className="font-bold text-lg">......</h3>
-              }
-              
+              <h3 className="font-bold text-lg">
+                {userName || "......"}
+              </h3>
             </div>
             <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-              <User className="w-6 h-6 text-gray-500" />
+              {/* <User className="w-6 h-6 text-gray-500" /> */}
+              <div className=" w-full h-full rounded-full overflow-hidden">
+                <img src={userImage} className="align-middle"/>
+              </div>
+            
             </div>
           </div>
 
@@ -84,10 +99,12 @@ export default function ProfileDropdown() {
             <button
               onClick={() => {
                 logout();
-                console.log(JSON.parse(localStorage.getItem("auth-storage")));
+                console.log(
+                  JSON.parse(localStorage.getItem("auth-storage"))
+                );
                 navigate("/");
               }}
-              className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg "
+              className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg"
             >
               Sign out
             </button>

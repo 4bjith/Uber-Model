@@ -16,7 +16,17 @@ const PersonalInfoCard = ({ name, email, profile, mobile }) => {
             className="rounded-full w-20 h-20 object-cover"
           />
         ) : (
-          <img src={profile} className="rounded-full w-20 h-20 object-cover" />
+          <img
+            src={
+              profile?.startsWith("http")
+                ? profile
+                : `${
+                    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000"
+                  }${profile}`
+            }
+            alt="Profile"
+            className="align-middle overflow-hidden rounded-full w-full h-full"
+          />
         )}
 
         <button

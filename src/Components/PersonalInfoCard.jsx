@@ -19,7 +19,10 @@ const PersonalInfoCard = ({ name, email, profile, mobile }) => {
           <img src={profile} className="rounded-full w-20 h-20 object-cover" />
         )}
 
-        <button className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow">
+        <button
+          onClick={() => Navigate("/account/updateprofile")}
+          className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4 text-gray-600"
@@ -52,7 +55,10 @@ const PersonalInfoCard = ({ name, email, profile, mobile }) => {
       {/* Phone Number */}
       <div className="mb-4">
         <p className="text-sm text-gray-500">Phone number</p>
-        <div className="flex items-center justify-between">
+        <div
+          onClick={() => Navigate("/account/updatenumber")}
+          className="flex items-center justify-between"
+        >
           <div className="flex items-center gap-2">
             <p className="text-lg">+91 {mobile}</p>
           </div>
@@ -63,7 +69,10 @@ const PersonalInfoCard = ({ name, email, profile, mobile }) => {
       {/* Email */}
       <div className="mb-4">
         <p className="text-sm text-gray-500">Email</p>
-        <div className="flex items-center justify-between">
+        <div
+          onClick={() => alert("You Can't change email")}
+          className="flex items-center justify-between"
+        >
           <div className="flex items-center gap-2">
             <p className="text-lg">{email}</p>
             <span title="Verified">✅</span>
@@ -71,6 +80,20 @@ const PersonalInfoCard = ({ name, email, profile, mobile }) => {
           <span className="text-gray-400">&gt;</span>
         </div>
       </div>
+
+      {/* Password */}
+      {/* <div className="mb-4">
+        <p className="text-sm text-gray-500">Password</p>
+        <div 
+        onClick={()=>alert("You Can't change email")}
+        className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <p className="text-lg">{password}</p>
+            <span title="Verified">✅</span>
+          </div>
+          <span className="text-gray-400">&gt;</span>
+        </div>
+      </div> */}
 
       {/* Language */}
       <div className="mb-2">

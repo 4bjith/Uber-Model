@@ -5,9 +5,10 @@ import api from "../api/axiosClient";
 
 const NameEditForm = () => {
   const [firstName, setFirstName] = useState("");
-  const[lastName, setLastName] = useState("");
+  const [lastName, setLastName] = useState("");
   const user = UserStore((state) => state.user);
   const token = UserStore((state) => state.token);
+  const setUser = UserStore((state) => state.setUser);
   const clearFirstName = () => setFirstName("");
   const clearLastName = () => setLastName("");
 
@@ -24,7 +25,7 @@ const NameEditForm = () => {
     try {
       const fullName = `${firstName} ${lastName}`.trim();
       const response = await api.put(
-        `/userupdate/${user._id}`,
+        "/userupdate",
         {
           name: fullName,
         },
@@ -32,6 +33,7 @@ const NameEditForm = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      setUser({ ...user, name: response.data.user.name });
       alert(`Update name to: ${response.data.user.name}`);
     } catch (err) {
       console.error("Error updating name:", err);
@@ -40,6 +42,16 @@ const NameEditForm = () => {
   };
 
   return (
+    // <div>
+    //   <UserUpdateForm
+    //     name={"Name"}
+    //     setFirstName={setFirstName}
+    //     setLastName={setLastName}
+    //     handleUpdate={handleUpdate}
+    //     clearFirstName={clearFirstName}
+    //     clearLastName={clearLastName}
+    //   />
+    // </div>
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow font-sans">
       <h2 className="text-2xl font-bold mb-2">Name</h2>
       <p className="text-gray-600 mb-6">

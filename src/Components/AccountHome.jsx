@@ -3,20 +3,32 @@ import { FaUser } from "react-icons/fa";
 import { GrShieldSecurity } from "react-icons/gr";
 import { RiGitRepositoryPrivateFill } from "react-icons/ri";
 
-function AccountHome({name,email,profile}) {
+function AccountHome({ name, email, profile }) {
   return (
     <div className="w-full h-full ">
       {/* profile img name etc */}
       <div className="w-full h-auto flex flex-col justify-center items-center py-[20px]">
         <div className="w-[90px] h-[90px] rounded-full overflow-auto ">
-          {
-            !profile? <img
-            src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
-            alt=""
-            className="align-middle overflow-auto w-full h-full"
-          />:<img src={profile} className="align-middle overflow-auto w-full h-full"/>
-          }
-         
+          {!profile ? (
+            <img
+              src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+              alt=""
+              className="align-middle overflow-auto w-full h-full"
+            />
+          ) : (
+            <img
+              src={
+                profile?.startsWith("http")
+                  ? profile
+                  : `${
+                      import.meta.env.VITE_API_BASE_URL ||
+                      "http://localhost:5000"
+                    }${profile}`
+              }
+              alt="Profile"
+              className="align-middle overflow-auto w-full h-full"
+            />
+          )}
         </div>
         <h2 className="text-[1.2rem] font-semibold tracking-wider text-center mt-[10px] ">
           {name}

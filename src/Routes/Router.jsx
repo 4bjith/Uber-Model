@@ -6,6 +6,8 @@ import UserHome from "../Pages/UserHome";
 import AccountManager from "../Pages/AccountManager";
 import NameEditForm from "../Components/NameEditForm";
 import LoginOrRegister from "../Pages/LoginOrRegister";
+import NumberUpdateForm from "../Components/NumberUpdateForm";
+import ProfileImgUpdateForm from "../Components/ProfileImgUpdateForm";
 
 export default function CustomeRoute() {
   return (
@@ -13,11 +15,13 @@ export default function CustomeRoute() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/home" element={<UserHome/>} />
+          <Route path="/home" element={<UserHome />} />
           <Route path="/bookride" element={<RideBooking />} />
           <Route path="/login" element={<LoginOrRegister />} />
           <Route path="/account" element={<AccountManager />} />
           <Route path="/account/updatename" element={<NameEditForm />} />
+          <Route path="/account/updatenumber" element={<NumberUpdateForm />} />
+           <Route path="/account/updateprofile" element={<ProfileImgUpdateForm />} />
         </Routes>
       </BrowserRouter>
     </>

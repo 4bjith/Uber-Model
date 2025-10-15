@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import api from "../api/axiosClient";
 import UserStore from "../Zustand/UserStore";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function ProfileImgUpdateForm() {
   const [image, setImage] = useState(null); // stores the selected file
   const token = UserStore((state) => state.token);
   const user = UserStore((state) => state.user);
   const setUser = UserStore((state) => state.setUser);
+  const navigate = useNavigate();
 
   // Clear selected image
   const clearImage = () => setImage(null);
@@ -26,7 +29,8 @@ export default function ProfileImgUpdateForm() {
       const updatedUser = response.data.user;
       // Update Zustand store
       setUser({ ...user, profileImg: updatedUser.profileImg });
-      alert("Profile image updated successfully!");
+      toast.success("Profile image updated successfully!");
+      // alert("Profile image updated successfully!");
       clearImage();
     },
     onError: (error) => {
@@ -52,6 +56,7 @@ export default function ProfileImgUpdateForm() {
     formData.append("profileImg", image);
 
     updateProfileImgMutation.mutate(formData);
+    setTimeout(()=>navigate("/account"),1000)
   };
 
   return (
@@ -99,6 +104,7 @@ export default function ProfileImgUpdateForm() {
       >
         {updateProfileImgMutation.isPending ? "Updating..." : "Update"}
       </button>
+      {/* <ToastContainer/> */}
     </div>
   );
 }

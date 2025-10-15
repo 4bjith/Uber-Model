@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import UserStore from "../Zustand/UserStore";
 import { useEffect } from "react";
 import api from "../api/axiosClient";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const NameEditForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +13,7 @@ const NameEditForm = () => {
   const setUser = UserStore((state) => state.setUser);
   const clearFirstName = () => setFirstName("");
   const clearLastName = () => setLastName("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(user);
@@ -34,7 +37,10 @@ const NameEditForm = () => {
         }
       );
       setUser({ ...user, name: response.data.user.name });
-      alert(`Update name to: ${response.data.user.name}`);
+
+      toast.success(`Update name to: ${response.data.user.name}`);
+      // delay navigation to let toast appear
+      setTimeout(() => navigate("/account"), 1200);
     } catch (err) {
       console.error("Error updating name:", err);
       alert("Failed to update name.");
@@ -108,6 +114,7 @@ const NameEditForm = () => {
       >
         Update
       </button>
+      {/* <ToastContainer /> */}
     </div>
   );
 };

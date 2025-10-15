@@ -2,29 +2,29 @@ import React, { useState } from "react";
 import AccountHome from "../Components/AccountHome";
 import PersonalInfoCard from "../Components/PersonalInfoCard";
 import api from "../api/axiosClient";
-import { useEffect } from "react";
+import { GiReturnArrow } from "react-icons/gi";
 import UserStore from "../Zustand/UserStore";
 import { useQuery } from "@tanstack/react-query";
-
+import { useNavigate } from "react-router-dom";
 function AccountManager() {
   const [isActive, setIsActive] = useState("home");
   const token = UserStore((state) => state.token);
-
+  const Navigate = useNavigate()
   // function to call get api function using react query;
 
-    const {data,isLoading} = useQuery({ queryKey: ['user'], queryFn: async()=>{
+  const { data, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
       return await api.get("/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
-    } })
+    },
+  });
 
-  if(isLoading) return <h1>loadinggg...................</h1>
+  if (isLoading) return <h1>loadinggg...................</h1>;
   return (
     <div className="w-full h-[100vh]">
       {/* Navbar */}
-      {/* <div className="">
-        <Navbar2 />
-      </div> */}
       {/* Body */}
       <div className="w-full h-full">
         {/* (Deskto view left) account menu */}
@@ -76,6 +76,13 @@ function AccountManager() {
             <></>
           )}
         </div>
+      </div>
+      <div className="w-[100vw] h-[10vh] flex justify-center items-center bg-gray-50 fixed bottom-0 z-10">
+        <button 
+        onClick={()=>{Navigate("/home")}}
+        className="w-[40%] h-[50px] rounded-lg bg-gray-300 font-semibold tracking-wider flex justify-center items-center">
+          <GiReturnArrow /><p className="px-3">return</p>
+        </button>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm";
 import api from "../api/axiosClient";
 import { useNavigate } from "react-router-dom";
 import UserStore from "../Zustand/UserStore";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login({ setIsOpen }) {
   const emailRef = useRef();
@@ -26,8 +27,10 @@ function Login({ setIsOpen }) {
       });
       addToken(response.data.token);
       console.log("Logged in:", response.data);
-      alert("Login successfully");
-      navigate("/home");
+      toast.success("LogIn successfully !");
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
     } catch (error) {
       console.error("Login error:", error);
       alert(error.response?.data?.message || "Login failed");
@@ -58,6 +61,7 @@ function Login({ setIsOpen }) {
             passwordRef={passwordRef}
           />
         </div>
+        {/* <ToastContainer/> */}
       </div>
     </div>
   );

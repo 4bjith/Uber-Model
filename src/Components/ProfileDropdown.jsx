@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import api from "../api/axiosClient"; // ✅ Import added
+import { toast, ToastContainer } from "react-toastify";
 
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,16 +51,26 @@ export default function ProfileDropdown() {
           {/* User Info */}
           <div className="flex justify-between items-center border-b pb-3 mb-3">
             <div>
-              <h3 className="font-bold text-lg">
-                {userName || "......"}
-              </h3>
+              <h3 className="font-bold text-lg">{userName || "......"}</h3>
             </div>
             <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
               {/* <User className="w-6 h-6 text-gray-500" /> */}
               <div className=" w-full h-full rounded-full overflow-hidden">
-                <img src={userImage} className="align-middle"/>
+                <img
+                  src={
+                    userImage
+                      ? userImage.startsWith("http")
+                        ? userImage
+                        : `${
+                            import.meta.env.VITE_API_BASE_URL ||
+                            "http://localhost:5000"
+                          }${userImage.startsWith("/") ? "" : "/"}${userImage}`
+                      : "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                  }
+                  alt="Profile"
+                  className="align-middle overflow-hidden rounded-full w-full h-full"
+                />
               </div>
-            
             </div>
           </div>
 
@@ -99,15 +110,17 @@ export default function ProfileDropdown() {
             <button
               onClick={() => {
                 logout();
-                console.log(
-                  JSON.parse(localStorage.getItem("auth-storage"))
-                );
-                navigate("/");
+                console.log(JSON.parse(localStorage.getItem("auth-storage")));
+                toast.success("You have log outed")
+                setTimeout(() => {
+                  navigate("/")
+                }, 1000);
               }}
               className="w-full h-[3rem] text-red-500 bg-gray-100 rounded-lg"
             >
               Sign out
             </button>
+            {/* <ToastContainer/> */}
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import api from "../api/axiosClient";
-
+import { ToastContainer, toast } from "react-toastify";
 function Register({ setIsOpen }) {
   const nameRef = useRef("");
   const emailRef = useRef("");
@@ -27,8 +27,9 @@ function Register({ setIsOpen }) {
       });
       const newUser = res.data;
       if (newUser) {
-        alert("Account created successfully! Please login to continue.");
-        setIsOpen("login");
+        toast.success("Account created successfully! Please login to continue.")
+        // alert("Account created successfully! Please login to continue.");
+        setTimeout(()=>{setIsOpen("login")},1000)
       }
     } catch (error) {
       console.error("Cant register ", error);
@@ -132,6 +133,7 @@ function Register({ setIsOpen }) {
               >
                 Register
               </button>
+              {/* <ToastContainer/> */}
             </div>
           </div>
         </div>

@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import api from "../api/axiosClient";
 import UserStore from "../Zustand/UserStore";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 function NumberUpdateForm() {
+  const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState("");
   const token = UserStore((state) => state.token);
   const user = UserStore((state) => state.user);
@@ -24,8 +27,9 @@ function NumberUpdateForm() {
     },
     onSuccess: (updatedUser) => {
       setUser({ ...user, mobile: updatedUser.mobile });
-
-      alert(`Mobile number updated successfully: ${updatedUser.mobile}`);
+      toast.success(
+        `Mobile number updated successfully: ${updatedUser.mobile}`
+      );
       clearNumber();
     },
     onError: (error) => {
@@ -35,6 +39,9 @@ function NumberUpdateForm() {
   });
   const handleUpdate = () => {
     updateMobileMutation.mutate(mobileNumber);
+    setTimeout(() => {
+      navigate("/account");
+    }, 1000);
   };
 
   return (
@@ -78,6 +85,7 @@ function NumberUpdateForm() {
       >
         {updateMobileMutation.isPending ? "Updating..." : "Update"}
       </button>
+      {/* <ToastContainer/> */}
     </div>
   );
 }

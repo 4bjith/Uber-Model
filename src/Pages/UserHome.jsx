@@ -6,6 +6,7 @@ import { FiNavigation } from "react-icons/fi";
 import { TbSquareDotFilled } from "react-icons/tb";
 import BookingSteps from "../Components/BookingSteps";
 import Suggestion from "../Components/Suggestion";
+import CurrentLocationMap from "../Components/CurrentLocationMap";
 
 export default function UserHome() {
 
@@ -68,7 +69,10 @@ export default function UserHome() {
             </div>
           </div>
           <div className="w-full h-[60vh] p-[20px] flex justify-center md:w-[60%] md:h-[60vh] ">
-            <div className="bg-blue-100 w-full h-full md:w-[80%]"></div>
+            {/* 🗺️ Map section */}
+            <div className="bg-blue-100 p-[10px] w-full h-full md:w-[80%]">
+              <CurrentLocationMap className="w-full h-full overflow-hidden"/>
+            </div>
           </div>
         </div>
         {/* Booking steps */}

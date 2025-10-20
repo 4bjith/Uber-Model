@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import api from "../api/axiosClient";
 import { useNavigate } from "react-router-dom";
 import UserStore from "../Zustand/UserStore";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function Login({ setIsOpen }) {
   const emailRef = useRef();
@@ -16,25 +16,44 @@ function Login({ setIsOpen }) {
     const password = passwordRef.current.value;
 
     if (!email || !password) {
-      alert("Please enter both email and password.");
+      toast.error("Please enter both email and password.");
+      return;
+    }
+    // Step 1: Get current location
+    if (!navigator.geolocation) {
+      toast.error("Geolocation is not supported by your browser.");
       return;
     }
 
-    try {
-      const response = await api.post("/login", {
-        email,
-        password,
-      });
-      addToken(response.data.token);
-      console.log("Logged in:", response.data);
-      toast.success("LogIn successfully !");
-      setTimeout(() => {
-        navigate("/home");
-      }, 1000);
-    } catch (error) {
-      console.error("Login error:", error);
-      alert(error.response?.data?.message || "Login failed");
-    }
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const location = {
+          type: "Point",
+          coordinates: [position.coords.longitude, position.coords.latitude], // GeoJSON format: [lng,lat]
+        };
+        try {
+          // Step 2: Send location with login request
+          const response = await api.post("/login", {
+            email,
+            password,
+            location,
+          });
+          addToken(response.data.token);
+          console.log("Logged in:", response.data);
+          toast.success("LogIn successfully !");
+          navigate("/home");
+        } catch (error) {
+          console.error("Login error:", error);
+          toast.error(error.response?.data?.message || "Login failed");
+        }
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        toast.error(
+          "Unable to get your location. Please enable location services."
+        );
+      }
+    );
   };
   return (
     <div className="w-full h-full flex justify-center items-center ">
